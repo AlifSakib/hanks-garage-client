@@ -3,6 +3,27 @@ import Order from "./Order";
 
 const Orders = () => {
   const [orders, setorders] = useState([]);
+
+  const handleStatus = (order) => {
+    fetch(`http://localhost:5000/orders/${order._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "Approved" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          const remainingOrders = orders.filter((odr) => odr._id !== order._id);
+          const approving = orders.find((odr) => odr._id === order._id);
+          approving.status = "Approved";
+
+          const newOrders = [...remainingOrders, approving];
+          setorders(newOrders);
+        }
+      });
+  };
   useEffect(() => {
     fetch("http://localhost:5000/orders")
       .then((res) => res.json())
@@ -13,10 +34,14 @@ const Orders = () => {
   console.log(orders);
   return (
     <div>
-      <div class="container px-5 py-24 mx-auto flex flex-wrap">
-        <div class="">
+      <div className="container px-5 py-24 mx-auto flex flex-wrap">
+        <div className="">
           {orders.map((order) => (
-            <Order key={order._id} order={order}></Order>
+            <Order
+              key={order._id}
+              order={order}
+              handleStatus={handleStatus}
+            ></Order>
           ))}
         </div>
       </div>
