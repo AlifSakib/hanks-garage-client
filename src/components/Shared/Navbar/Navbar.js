@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut();
+  };
   return (
     <div>
-      <header className="text-gray-600 body-font">
+      <div className="text-gray-600 body-font">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <Link
             to="/"
@@ -30,31 +36,51 @@ const Navbar = () => {
             <Link to="/home" className="mr-5 hover:text-gray-900">
               Home
             </Link>
-            <Link to="/orders" className="mr-5 hover:text-gray-900">
-              Order
-            </Link>
-            <Link className="mr-5 hover:text-gray-900">Third Link</Link>
-            <Link className="mr-5 hover:text-gray-900">Fourth Link</Link>
+            {user?.uid && (
+              <Link to="/orders" className="mr-5 hover:text-gray-900">
+                Order
+              </Link>
+            )}
+            {user?.uid ? (
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+              >
+                Logout
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-4 h-4 ml-1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+              >
+                Login
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-4 h-4 ml-1"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </Link>
+            )}
           </nav>
-          <Link
-            to="/signup"
-            className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-          >
-            Signup
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </Link>
         </div>
-      </header>
+      </div>
     </div>
   );
 };

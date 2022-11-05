@@ -1,24 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    login(email, password)
+      .then((result) => {
+        toast.success("Login Success");
+        navigate(from, { replace: true });
+        form.reset();
+      })
+      .catch((error) => {
+        toast.error("Login Failed");
+      });
+  };
   return (
     <div>
-      <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+      <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 ">
         <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
-          Brand
+          Hank's Garage
         </h1>
 
-        <form className="mt-6">
+        <form onSubmit={handleSubmit} className="mt-6">
           <div>
             <label
-              for="username"
-              className="block text-sm text-gray-800 dark:text-gray-200"
+              htmlFor="username"
+              className="block text-sm text-gray-800 dark:text-gray-200 text-start"
             >
-              Username
+              Email
             </label>
             <input
               type="text"
+              name="email"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
@@ -26,7 +50,7 @@ const Login = () => {
           <div className="mt-4">
             <div className="flex items-center justify-between">
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm text-gray-800 dark:text-gray-200"
               >
                 Password
@@ -41,6 +65,7 @@ const Login = () => {
 
             <input
               type="password"
+              name="password"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
@@ -87,7 +112,10 @@ const Login = () => {
         <p className="mt-8 text-xs font-light text-center text-gray-400">
           {" "}
           Don't have an account?{" "}
-          <Link className="font-medium text-gray-700 dark:text-gray-200 hover:underline">
+          <Link
+            to="/signup"
+            className="font-medium text-gray-700 dark:text-gray-200 hover:underline"
+          >
             Create One
           </Link>
         </p>
