@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Service = ({ service }) => {
   const { title, img, price } = service;
+
   return (
     <div>
       <div className="p-4 rounded shadow-md bg-slate-100">
@@ -21,9 +23,12 @@ const Service = ({ service }) => {
               debitis blanditiis beatae quidem nobis molestiae consectetur
               officia eaque ducimus voluptatum!
             </p>
-            <button className="px-6 py-2 font-bold tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80">
+            <Link
+              to={`/checkout/${service._id}`}
+              className="px-6 py-2 font-bold tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+            >
               Take Service
-            </button>
+            </Link>
           </div>
         </div>
       </div>
