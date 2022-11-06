@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Checkout = () => {
+  const { user } = useContext(AuthContext);
   const { data } = useLoaderData();
+
   const { _id, title, price, img } = data;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const form = e.target;
+    const email = form.email.value;
     const customerDetails = {
       name: form.name.value,
       email: form.email.value,
@@ -18,6 +22,7 @@ const Checkout = () => {
 
     const order = {
       service: _id,
+      email,
       serviceName: title,
       price,
       customerDetails,
@@ -81,6 +86,7 @@ const Checkout = () => {
                 type="email"
                 id="email"
                 name="email"
+                defaultValue={user?.email}
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
