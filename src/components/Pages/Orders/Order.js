@@ -31,7 +31,11 @@ const Order = ({ order, handleStatus }) => {
             <p className="leading-relaxed text-base">email : {email}</p>
             <button
               onClick={() => handleStatus(order)}
-              className="mt-3 text-red-500 inline-flex items-center bg-red-100 px-1 pr-6 py-1 rounded-md hover:bg-red-200"
+              className={
+                status
+                  ? "mt-3 text-green-500 inline-flex items-center bg-green-100 px-1 pr-6 py-1 rounded-md hover:bg-green-200"
+                  : "mt-3 text-red-500 inline-flex items-center bg-red-100 px-1 pr-6 py-1 rounded-md hover:bg-red-200"
+              }
             >
               {status ? status : "Pending"}
               <svg
