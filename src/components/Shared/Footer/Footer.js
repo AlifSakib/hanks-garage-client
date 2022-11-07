@@ -15,12 +15,12 @@ const Footer = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+                className="w-10 h-10 text-white p-2 bg-red-500 rounded-full"
                 viewBox="0 0 24 24"
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-              <span className="ml-3 text-xl">Tailblocks</span>
+              <span className="ml-3 text-xl">Hank's Garage</span>
             </Link>
             <p className="mt-2 text-sm text-gray-500">
               Air plant banjo lyft occupy retro adaptogen indego
