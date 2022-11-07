@@ -6,7 +6,6 @@ const Services = () => {
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
-
   const pages = Math.ceil(count / size);
   useEffect(() => {
     fetch(`http://localhost:5000/services?page=${page}&size=${size}`)
@@ -35,27 +34,35 @@ const Services = () => {
               <Service key={service._id} service={service}></Service>
             ))}
           </div>
-          <div>
-            {[...Array(pages).keys()].map((number) => (
-              <button
-                onClick={() => setPage(number)}
-                className="mx-5 my-10 px-4 bg-red-500 py-1 text-white rounded-md"
-                key={number}
+          <div className="flex justify-center space-x-4 mt-10 text-white">
+            <div className="space-x-6 flex justify-center">
+              {[...Array(pages).keys()].map((number) => (
+                <button
+                  onClick={() => setPage(number)}
+                  className={
+                    number === page
+                      ? "px-4 py-2 mx-1 text-white transition-colors duration-300 transform bg-red-500 rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-red-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200"
+                      : "px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-red-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 border-2"
+                  }
+                  key={number}
+                >
+                  {number + 1}
+                </button>
+              ))}
+            </div>
+            <div>
+              <select
+                className="px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-red-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 border-2"
+                onChange={(e) => setSize(e.target.value)}
               >
-                {number + 1}
-              </button>
-            ))}
-            <select
-              className="mx-5 my-10 px-4 bg-red-500 py-1 text-white rounded-md"
-              onChange={(e) => setSize(e.target.value)}
-            >
-              <option value="3" selected>
-                3
-              </option>
-              <option value="6">6</option>
-              <option value="9">9</option>
-              <option value="12">12</option>
-            </select>
+                <option value="3" selected>
+                  3
+                </option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                <option value="12">12</option>
+              </select>
+            </div>
           </div>
         </div>
       </section>
