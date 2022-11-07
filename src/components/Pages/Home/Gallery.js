@@ -1,4 +1,10 @@
 import React from "react";
+import image1 from "../../../assets/gallery/image1.jpeg";
+import image2 from "../../../assets/gallery/image2.webp";
+import image3 from "../../../assets/gallery/image3.webp";
+import image4 from "../../../assets/gallery/image4.jpeg";
+import image5 from "../../../assets/gallery/image5.jpeg";
+import image6 from "../../../assets/gallery/image6.webp";
 
 const Gallery = () => {
   return (
@@ -21,21 +27,21 @@ const Gallery = () => {
                 <img
                   alt="gallery"
                   className="w-full object-cover h-full object-center block"
-                  src="https://dummyimage.com/500x300"
+                  src={image1}
                 />
               </div>
               <div className="md:p-2 p-1 w-1/2">
                 <img
                   alt="gallery"
                   className="w-full object-cover h-full object-center block"
-                  src="https://dummyimage.com/501x301"
+                  src={image2}
                 />
               </div>
               <div className="md:p-2 p-1 w-full">
                 <img
                   alt="gallery"
                   className="w-full h-full object-cover object-center block"
-                  src="https://dummyimage.com/600x360"
+                  src={image3}
                 />
               </div>
             </div>
@@ -44,21 +50,21 @@ const Gallery = () => {
                 <img
                   alt="gallery"
                   className="w-full h-full object-cover object-center block"
-                  src="https://dummyimage.com/601x361"
+                  src={image4}
                 />
               </div>
               <div className="md:p-2 p-1 w-1/2">
                 <img
                   alt="gallery"
                   className="w-full object-cover h-full object-center block"
-                  src="https://dummyimage.com/502x302"
+                  src={image5}
                 />
               </div>
               <div className="md:p-2 p-1 w-1/2">
                 <img
                   alt="gallery"
                   className="w-full object-cover h-full object-center block"
-                  src="https://dummyimage.com/503x303"
+                  src={image6}
                 />
               </div>
             </div>
